@@ -9,6 +9,10 @@ terraform {
     aws = {
       source = "hashicorp/aws"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.5.1"
+    }
   }
 }
 
@@ -19,22 +23,18 @@ provider "aws" {
 
 # Create a bucket AWS S3
 resource "aws_s3_bucket" "s3_example" {
-  bucket = "bucket-flugel-1234567654"
+  bucket = "my-ups-bucket-${local.s3-sufix}"
   tags = {
-    Name        = "Flugel"
-    Environment = "Dev"
-    Owner       = "InfraTeam"
+    Name = "my_ups_bucket-${local.s3-sufix}"
   }
 }
 
 #  Create a AWS EC2 Instance
 resource "aws_instance" "ec2_example" {
-  ami           = "ami-830c94e3"
+  ami           = "ami-01c647eace872fc02"
   instance_type = "t2.micro"
   tags = {
-    Name        = "Flugel"
-    Environment = "Dev"
-    Owner       = "InfraTeam"
+    Name = "Flugel"
   }
 }
 
@@ -67,4 +67,14 @@ module "ecs_main" {
 output "nginx_dns_lb" {
   description = "DNS load balancer"
   value       = module.ecs_main.nginx_dns_lb
+}
+
+resource "random_string" "sufijo-s3" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
+locals {
+  s3-sufix = "ups-${random_string.sufijo-s3.id}"
 }
