@@ -3,7 +3,7 @@
 
 ### IntelliJ IDEA ###
 .idea
-vendor
+**/vendor/*
 
 # .tfstate files
 *.tfstate
