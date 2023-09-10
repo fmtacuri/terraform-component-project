@@ -47,7 +47,6 @@ output "instance_id" {
   value = trimspace(aws_instance.ec2_example.tags.Name)
 }
 
-
 /////////////////////////////////////
 // Amazon ECS configuration
 /////////////////////////////////////
