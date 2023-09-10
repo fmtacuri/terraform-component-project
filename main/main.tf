@@ -53,7 +53,6 @@ output "instance_id" {
 
 module "ecs_main" {
   source = "../ecs-module/"
-
   app_name           = "my-ecs-app"
   app_environment    = "Dev"
   aws_region         = "us-east-1"
