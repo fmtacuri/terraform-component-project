@@ -52,7 +52,7 @@ output "instance_id" {
 /////////////////////////////////////
 
 module "ecs_main" {
-  source = "../ecs-module/"
+  source             = "../ecs-module/"
   app_name           = "my-ecs-app"
   app_environment    = "Dev"
   aws_region         = "us-east-1"
@@ -68,7 +68,7 @@ output "nginx_dns_lb" {
 }
 
 resource "random_string" "sufijo-s3" {
-  length  = 10
+  length  = 9
   special = false
   upper   = false
 }
