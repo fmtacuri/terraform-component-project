@@ -68,7 +68,7 @@ output "nginx_dns_lb" {
 }
 
 resource "random_string" "sufijo-s3" {
-  length  = 9
+  length  = 8
   special = false
   upper   = false
 }
