@@ -79,7 +79,7 @@ jobs:
     
     - name: Setup github
       working-directory: "/home/runner/work/test_terraform_projects/test_terraform_projects/tests/"
-      run: go mod init "github.com/chrismerchan/aws_s3_terratest"
+      run: go mod init "github.com/fmtacuri/terraform-component-project"
 
     - name: Dependencies
       working-directory: "/home/runner/work/test_terraform_projects/test_terraform_projects/tests/"
