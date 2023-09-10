@@ -17,8 +17,9 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
+  region     = "us-east-1"
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 # Create a bucket AWS S3
@@ -76,3 +77,7 @@ resource "random_string" "sufijo-s3" {
 locals {
   s3-sufix = "ups-${random_string.sufijo-s3.id}"
 }
+
+variable "access_key" {}
+
+variable "secret_key" {}
