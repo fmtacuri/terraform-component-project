@@ -5,15 +5,15 @@
 ***************************************/
 
 variable "aws_region" {
-  type = string
-  description = "AWS region"  
-  default = "us-west-2"
+  type        = string
+  description = "AWS region"
+  default     = "us-east-1"
 }
 
 variable "app_name" {
-  type = string
-  description = "Application name"  
-  default = "my-ecs-app"
+  type        = string
+  description = "Application name"
+  default     = "my-ecs-app"
 }
 
 /////////////////////////////////////////
@@ -21,21 +21,21 @@ variable "app_name" {
 /////////////////////////////////////////
 
 variable "vpc_cidr" {
-  type = string
+  type        = string
   description = "VPC IPv4 CIDR blocks"
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "admin_sources_cidr" {
-  type = list(string)
+  type        = list(string)
   description = "List of IPv4 CIDR blocks from which to allow admin access"
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "app_sources_cidr" {
-  type = list(string)
+  type        = list(string)
   description = "List of IPv4 CIDR blocks from which to allow application access"
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
 
 /////////////////////////////////////////
@@ -43,39 +43,39 @@ variable "app_sources_cidr" {
 /////////////////////////////////////////
 
 variable "cluster_runner_type" {
-  type = string
+  type        = string
   description = "EC2 instance type of ECS Cluster Runner"
-  default = "t3.medium"
+  default     = "t2.micro"
 }
 
 //cluster with 2 instances by default
 
 variable "cluster_runner_count" {
-  type = string
-  description = "Number of EC2 instances for ECS Cluster Runner" 
-  default = "2"
+  type        = string
+  description = "Number of EC2 instances for ECS Cluster Runner"
+  default     = "2"
 }
 
 variable "aws_key_pair_name" {
-  type = string
+  type        = string
   description = "AWS key pair name"
-  default = "kruger"
+  default     = "kruger"
 }
 /////////////////////////////////////////
 // Variables Docker 
 /////////////////////////////////////////
 
 variable "docker_image_name" {
-  type = string
-  description = "Docker image name" 
-  default = "my-nginx-ecs"
+  type        = string
+  description = "Docker image name"
+  default     = "tesis-ups"
 }
 
 // by default is a docker image (with nginx + phyton + webpage) in ECR
 variable "ecr_app_image" {
-  type = string
+  type        = string
   description = "Docker image name in ECR"
-  default = "704246131615.dkr.ecr.us-west-2.amazonaws.com/my-nginx-ecs:latest"  
+  default     = "679343794938.dkr.ecr.us-east-1.amazonaws.com/tesis-ups:latest"
 }
 
 /////////////////////////////////////////
@@ -83,19 +83,19 @@ variable "ecr_app_image" {
 ///////////////////////////////////////// 
 
 variable "nginx_app_name" {
-  type = string
+  type        = string
   description = "Name of Application Container"
-  default = "mynginx"
+  default     = "mynginx"
 }
 
 variable "nginx_app_port" {
   description = "Port exposed by the Docker image to redirect traffic to"
-  default = 80
+  default     = 80
 }
 
 variable "nginx_app_count" {
   description = "Number of Docker containers to run"
-  default = 2
+  default     = 2
 }
 
 
@@ -112,12 +112,12 @@ variable "nginx_app_count" {
 
 variable "nginx_fargate_cpu" {
   description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
-  default = "512"
+  default     = "256"
 }
 
 variable "nginx_fargate_memory" {
   description = "Fargate instance memory to provision (in MiB)"
-  default = "1024"
+  default     = "512"
 }
 
 /////////////////////////////////////////
@@ -125,14 +125,14 @@ variable "nginx_fargate_memory" {
 /////////////////////////////////////////
 
 variable "separator" {
-  type = string
-  description = "Separator character" 
-  default = "\",\""
+  type        = string
+  description = "Separator character"
+  default     = "\",\""
 }
 
 variable "app_environment" {
-  type = string
+  type        = string
   description = "Application environment"
-  default = "Dev"
+  default     = "Dev"
 }
 

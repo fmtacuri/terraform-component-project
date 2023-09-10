@@ -15,7 +15,7 @@ import (
   // Standard Go test, with the "Test" prefix and accepting the *testing.T struct.
   func TestECS(t *testing.T) {
 	// I work in eu-west-2, you may differ
-	awsRegion := "us-west-2"
+	awsRegion := "us-east-1"
     //fileContent := ""
 	// This is using the terraform package that has a sensible retry function.
 	terraformOpts := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
