@@ -136,6 +136,3 @@ variable "app_environment" {
   default     = "Dev"
 }
 
-variable "access_key" {}
-
-variable "secret_key" {}
