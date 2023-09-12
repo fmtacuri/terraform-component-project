@@ -3,7 +3,38 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-  return "<!DOCTYPE html><html><head><title>AWS Challenge</title><h1>AWS EC2 Tag Instances:</h1></head><body>my-ecs-app-ecs-cluster-runner-0 <br/> ,my-ecs-app-ecs-cluster-runner-1 <br/> </body></html>"
+    html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>AWS UPS - Tacuri Freddy</title>
+    </head>
+    <body>
+        <h1>Aws Ec2 Terraform Lab</h1>
+        <table>
+            <tr>
+                <th>Instancias</th>
+            </tr>
+    """
+
+    # Loop through trigger names and add rows to the table
+    original_string = " + my-ecs-app-ecs-cluster-runner-0,my-ecs-app-ecs-cluster-runner-1 + "
+    new_string = original_string.replace('+', '').strip()
+    elements = new_string.split(',')
+
+    quoted_elements = ['"' + element + '"' for element in elements]
+
+    # Loop through trigger names and add rows to the table
+    for name in quoted_elements:
+        html += f'<tr><td>{name}</td></tr>'
+
+    html += """
+        </table>
+    </body>
+    </html>
+    """
+
+    return html
 
 if __name__ == "__main__":
     # Only for debugging while developing

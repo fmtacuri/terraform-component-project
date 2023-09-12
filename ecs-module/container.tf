@@ -27,7 +27,7 @@ data "template_file" "nginx_app" {
 resource "null_resource" "instances" {
   count = var.cluster_runner_count
   triggers = {
-    name = "${var.app_name}-ecs-cluster-runner-${count.index} <br/> "
+    name = "${var.app_name}-ecs-cluster-runner-${count.index}"
   }
 }
 
@@ -39,7 +39,38 @@ app = Flask(__name__)
 
 @app.route(\"/\")
 def hello():
-  return \"<!DOCTYPE html><html><head><title>AWS Challenge</title><h1>AWS EC2 Tag Instances:</h1></head><body>${join(var.separator, null_resource.instances.*.triggers.name)}</body></html>\"
+    html = \"\"\"
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>AWS UPS - Tacuri Freddy</title>
+    </head>
+    <body>
+        <h1>Aws Ec2 Terraform Lab</h1>
+        <table>
+            <tr>
+                <th>Instancias</th>
+            </tr>
+    \"\"\"
+
+    # Loop through trigger names and add rows to the table
+    original_string = "\"" + "${join(",", null_resource.instances.*.triggers.name)}" + "\""
+    new_string = original_string.replace('+', '').strip()
+    elements = new_string.split(',')
+
+    quoted_elements = ['\"' + element + '\"' for element in elements]
+
+    # Loop through trigger names and add rows to the table
+    for name in quoted_elements:
+        html += f'<tr><td>{name}</td></tr>'
+
+    html += \"\"\"
+        </table>
+    </body>
+    </html>
+    \"\"\"
+
+    return html
 
 if __name__ == \"__main__\":
     # Only for debugging while developing
@@ -48,7 +79,7 @@ if __name__ == \"__main__\":
  docker build -f Dockerfile -t ${var.docker_image_name} . ;
  docker tag ${var.docker_image_name}:latest ${var.ecr_app_image};
  docker push ${var.ecr_app_image};
-EOF  
+EOF
   }
 }
 
