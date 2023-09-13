@@ -53,13 +53,13 @@ variable "cluster_runner_type" {
 variable "cluster_runner_count" {
   type        = string
   description = "Number of EC2 instances for ECS Cluster Runner"
-  default     = "2"
+  default     = "1"
 }
 
 variable "aws_key_pair_name" {
   type        = string
   description = "AWS key pair name"
-  default     = "kruger"
+  default     = "upskey"
 }
 /////////////////////////////////////////
 // Variables Docker 

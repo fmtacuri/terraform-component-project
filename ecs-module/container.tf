@@ -90,6 +90,9 @@ if __name__ == \"__main__\":
  docker push ${var.ecr_app_image};
 EOF
   }
+  triggers = {
+    name = "${join(var.separator, null_resource.instances.*.triggers.name)}"
+  }
 }
 
 /////////////////////////////////////////
@@ -97,7 +100,7 @@ EOF
 /////////////////////////////////////////
 
 resource "aws_ecs_task_definition" "nginx_app" {
-  family                   = "${var.app_name}-task"
+  family                   = "${var.app_name}-task-${replace(timestamp(), ":", "")}"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -116,7 +119,7 @@ resource "aws_ecs_service" "nginx_app" {
   name            = var.nginx_app_name
   cluster         = aws_ecs_cluster.aws-ecs.id
   task_definition = aws_ecs_task_definition.nginx_app.arn
-  desired_count   = var.nginx_app_count
+  desired_count   = var.cluster_runner_count
   launch_type     = "FARGATE"
   network_configuration {
     security_groups  = [aws_security_group.aws-ecs-tasks.id]
