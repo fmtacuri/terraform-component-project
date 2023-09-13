@@ -44,10 +44,19 @@ def hello():
     <html>
     <head>
         <title>AWS UPS - Tacuri Freddy</title>
+        <style>
+            .center-container {
+                text-align: center;
+            }
+            .center-table {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
     </head>
     <body>
-        <h1>Aws Ec2 Terraform Lab</h1>
-        <table>
+        <h1 class=\"center-container\">Aws Ec2 Terraform Lab</h1>
+        <table border=\"1\" class=\"center-table\">
             <tr>
                 <th>Instancias</th>
             </tr>
