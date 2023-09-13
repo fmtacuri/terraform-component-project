@@ -100,7 +100,7 @@ EOF
 /////////////////////////////////////////
 
 resource "aws_ecs_task_definition" "nginx_app" {
-  family                   = "${var.app_name}-task-${replace(timestamp(), ":", "")}"
+  family                   = "${var.app_name}-task-${join("", split(" ", replace(formatdate("YYYY-MM-DD HH:MM:ss", timestamp()), ":", "")))}"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
